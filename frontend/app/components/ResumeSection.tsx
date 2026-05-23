@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { API_URL } from "../lib/api";
 
 type ParseState = "idle" | "parsing" | "done";
 
@@ -22,7 +23,7 @@ export default function ResumeSection() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://localhost:8000/resumes/upload?user_id=1", {
+      const response = await fetch(`${API_URL}/resumes/upload?user_id=1`, {
         method: "POST",
         body: formData,
       });
