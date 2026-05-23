@@ -4,6 +4,8 @@ import { useState, useRef, useCallback } from "react";
 
 type ParseState = "idle" | "parsing" | "done";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
 export default function ResumeSection() {
   const [file, setFile] = useState<File | null>(null);
   const [state, setState] = useState<ParseState>("idle");
@@ -22,7 +24,7 @@ export default function ResumeSection() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://localhost:8000/resumes/upload?user_id=1", {
+      const response = await fetch(`${API_URL}/resumes/upload?user_id=1`, {
         method: "POST",
         body: formData,
       });
