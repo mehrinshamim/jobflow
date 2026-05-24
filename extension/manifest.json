@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Job Autofiller",
+  "name": "JobFlow",
   "version": "1.0",
   "description": "Auto-fills job applications using AI",
   "permissions": [
@@ -27,7 +27,7 @@
     }
   ],
   "action": {
-    "default_title": "Job Autofiller",
+    "default_title": "JobFlow",
     "default_popup": "popup.html"
   }
 }
