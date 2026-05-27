@@ -51,6 +51,16 @@ class ReasoningService:
 
         raw = response.choices[0].message.content.strip()
 
+        if raw.startswith("```json"):
+            raw = raw[7:]
+        elif raw.startswith("```"):
+            raw = raw[3:]
+        
+        if raw.endswith("```"):
+            raw = raw[:-3]
+            
+        raw = raw.strip()
+
         try:
             data = json.loads(raw)
             return ScoringResult(**data)
