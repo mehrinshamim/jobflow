@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Job } from "../types";
+import { API_URL } from "../lib/api";
 
 const MOCK_JOBS: Job[] = [
   {
@@ -104,7 +105,7 @@ export default function JobSearchWithResults({ onJobsFound }: Props) {
 
     try {
       // 1. Discover Jobs
-      const discoverRes = await fetch("http://localhost:8000/jobs/discover", {
+      const discoverRes = await fetch(`${API_URL}/jobs/discover`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1, title: role, location, limit }),
@@ -120,7 +121,7 @@ export default function JobSearchWithResults({ onJobsFound }: Props) {
       // Poll Discovery
       while (true) {
         console.log(`Polling discover status for task ${discover_task_id}...`);
-        const statusRes = await fetch(`http://localhost:8000/jobs/discover/${discover_task_id}/status`);
+        const statusRes = await fetch(`${API_URL}/jobs/discover/${discover_task_id}/status`);
         const statusData = await statusRes.json();
         console.log(`Discover task state:`, statusData.state);
 
@@ -131,7 +132,7 @@ export default function JobSearchWithResults({ onJobsFound }: Props) {
 
       // 2. Score Batch
       setLoadingStep({ title: "Scoring Fits", subtitle: "AI is evaluating jobs against your resume..." });
-      const scoreRes = await fetch("http://localhost:8000/jobs/score/batch", {
+      const scoreRes = await fetch(`${API_URL}/jobs/score/batch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1, resume_id: parseInt(resumeId, 10), search_id }),
@@ -146,7 +147,7 @@ export default function JobSearchWithResults({ onJobsFound }: Props) {
       // Poll Scoring
       while (true) {
         console.log(`Polling scoring status for task ${score_task_id}...`);
-        const sRes = await fetch(`http://localhost:8000/jobs/score/${score_task_id}/status`);
+        const sRes = await fetch(`${API_URL}/jobs/score/${score_task_id}/status`);
         const sData = await sRes.json();
         console.log(`Scoring task state:`, sData.state);
 
@@ -157,7 +158,7 @@ export default function JobSearchWithResults({ onJobsFound }: Props) {
 
       // 3. List Jobs
       setLoadingStep({ title: "Loading Results", subtitle: "Fetching your prioritized jobs..." });
-      const listRes = await fetch(`http://localhost:8000/jobs/?user_id=1&search_id=${search_id}`);
+      const listRes = await fetch(`${API_URL}/jobs/?user_id=1&search_id=${search_id}`);
       if (!listRes.ok) throw new Error("Failed to fetch final jobs list");
 
       const finalJobs = await listRes.json();
