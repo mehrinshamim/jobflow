@@ -92,4 +92,6 @@ def list_jobs(user_id: int, search_id: int | None = None, session: Session = Dep
         ).all()
     else:
         jobs = session.exec(select(Job).where(Job.user_id == user_id)).all()
+    # Sort by score descending. Jobs with null/unscored values are explicitly placed last.
+    jobs = sorted(jobs, key=lambda job: (job.score is None, -(job.score or 0)))
     return jobs
