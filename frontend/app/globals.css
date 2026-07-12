@@ -50,3 +50,147 @@ h1, h2, h3, h4, h5, h6, .font-urbanist {
 .spinner { animation: spin 0.75s linear infinite; }
 .glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
 .score-bar { animation: score-fill 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+/* ==========================================================
+   Responsive Styles
+   Append at the end of globals.css
+   ========================================================== */
+
+/* ---------- Mobile Devices (up to 480px) ---------- */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .flex-row {
+    flex-direction: column;
+  }
+}
+
+/* ---------- Tablets (481px - 768px) ---------- */
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .container {
+    width: 100%;
+    padding-inline: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  button,
+  .btn {
+    min-height: 44px;
+  }
+}
+
+/* ---------- Small Laptops (769px - 992px) ---------- */
+@media (min-width: 769px) and (max-width: 992px) {
+  .container {
+    width: 92%;
+    margin-inline: auto;
+  }
+
+  section {
+    padding: 5rem 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
